@@ -1,4 +1,4 @@
 # NotesWebSite
-<p>Это сайт заметок. Здесь можно создавать, редактировать и просматривать заметки</p>
-<p>Можно зарегистрироваться, а можно использовать ссылки</p>
-<img src="https://github.com/EgorDarkOverlord/NotesWebSite/raw/master/screenshots/screenshot_enter.png" width="500">
+<p>Р­С‚Рѕ СЃР°Р№С‚ Р·Р°РјРµС‚РѕРє. Р—РґРµСЃСЊ РјРѕР¶РЅРѕ СЃРѕР·РґР°РІР°С‚СЊ, СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ Рё РїСЂРѕСЃРјР°С‚СЂРёРІР°С‚СЊ Р·Р°РјРµС‚РєРё</p>
+<p>РњРѕР¶РЅРѕ Р·Р°СЂРµРіРёСЃС‚СЂРёСЂРѕРІР°С‚СЊСЃСЏ, Р° РјРѕР¶РЅРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЃСЃС‹Р»РєРё</p>
+<img src="https://github.com/EgorDarkOverlord/NotesWebSite/raw/main/screenshots/screenshot_enter.png" width="500">

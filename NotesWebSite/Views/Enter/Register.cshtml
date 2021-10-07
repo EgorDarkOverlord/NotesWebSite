@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Регистрация";
+}
+
+@model NotesWebSite.ViewModels.RegisterModel
+
+@section styles
+{
+    <link rel="stylesheet" href="~/css/valid.css" asp-append-version="true">
+}
+
+<div class="text-center">
+    <h1 class="display-4">Регистрация</h1>
+    <p>Зарегистрируйтесь, чтобы создавать свои заметки</p>
+    <a asp-area="" asp-controller="Enter" asp-action="Login">Назад</a>
+    <br />
+    <br />
+    <div class="d-flex justify-content-around align-items-start">
+        <div class="p-2 Border">
+            <form method="post" asp-antiforgery="true">
+                <div class="p-2">
+                    <div class="text-start">Логин</div>
+                    <div><input type="text" class="Input" asp-for="Login" /></div>
+                    <span asp-validation-for="Login"></span>
+                </div>
+                <div class="p-2">
+                    <div>Пароль</div>
+                    <div><input type="password" class="Input" asp-for="Password" /></div>
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <div class="p-2">
+                    <div>Подтвердите пароль</div>
+                    <div><input type="password" class="Input" asp-for="ConfirmPassword" /></div>
+                    <span asp-validation-for="ConfirmPassword"></span>
+                </div>
+                <br />
+                <div class="p-2">
+                    <input type="submit" class="Button" value="Зарегистрироваться" asp-controller="Enter" asp-action="Register" />
+                    <div>@Html.ValidationMessage("RegisterError")</div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

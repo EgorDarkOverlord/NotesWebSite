@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Начальная страница";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Добро пожаловать</h1>
+    Это сайт заметок. Здесь вы можете писать свои заметки. Для этого вы можете зарегистрироваться или создать ссылку
+    <p>Давайте начнем <a asp-area="" asp-controller="Enter" asp-action="Login">сейчас</a>.</p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <p>Продолжить как <a asp-area="" asp-controller="Notes" asp-action="UserNotes">@User.Identity.Name</a>.</p>
+    }
+    @{
+        var link = Context.Request.Cookies.DeserializeObjectFromJson<Link>("link");
+        if (link != null)
+        {
+            <p>Перейти по ссылке <a asp-area="" asp-controller="Notes" asp-action="LinkNotes">@link.Id</a>.</p>
+        }
+    }
+</div>

@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Вход";
+}
+
+@model NotesWebSite.ViewModels.LoginModel
+
+@section styles
+{
+    <link rel="stylesheet" href="~/css/valid.css" asp-append-version="true">
+}
+
+<div class="text-center">
+    <h1 class="display-4">Вход</h1>
+    Это сайт заметок. Здесь вы можете писать свои заметки. Для этого вы можете зарегистрироваться или создать ссылку
+    <br />
+    <br />
+    <div class="d-flex justify-content-around align-items-start">
+        <div class="p-2 Border">
+            <form method="post">
+                <div class="p-2">
+                    <div class="text-start">Логин</div>
+                    <div><input type="text" class="Input" asp-for="Login" /></div>
+                    <span asp-validation-for="Login"></span>
+                </div>
+                <div class="p-2">
+                    <div>Пароль</div>
+                    <div><input type="password" class="Input" asp-for="Password" /></div>
+                    <span asp-validation-for="Password"></span>
+                </div>
+                <br />
+                <div class="p-2">
+                    <input type="submit" class="Button" value="Вход" asp-controller="Enter" asp-action="Login" />
+                    <div>@Html.ValidationMessage("LoginError")</div>
+                </div>
+                <div class="p-2">
+                    <a asp-area="" asp-controller="Enter" asp-action="Register">Регистрация</a>
+                </div>
+            </form>
+        </div>
+        <div class="p-2 Border">
+            <form method="post">
+                <div class="p-2">
+                    <div>Введите ссылку</div>
+                    <div><input type="text" class="Input" name="link" data-val="true" data-val-required="Не указана ссылка" id="link" /></div>
+                    <span class="field-validation-valid" data-valmsg-for="link" data-valmsg-replace="true"></span>
+                </div>
+                <br />
+                <div class="p-2">
+                    <input type="submit" class="Button" value="Перейти по ссылке" asp-controller="Enter" asp-action="GoToLink" />
+                </div>
+                <div class="p-2">
+                    <a asp-area="" asp-controller="Enter" asp-action="GenerateLink">Сгенерировать ссылку</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

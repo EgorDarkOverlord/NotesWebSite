@@ -1,0 +1,11 @@
+﻿.field-validation-error {
+    color: #ce4133;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.Input.input-validation-error {
+    border-color: #8d3939;
+}

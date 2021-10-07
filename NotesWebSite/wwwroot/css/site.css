@@ -1,0 +1,96 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+.Header {
+    background-color: #33ce78;
+    border-bottom: solid #398d57 3px;
+}
+
+    .Header a {
+        color: #e5e5e5;
+        text-decoration: none;
+        font-size: 40px;
+        font-weight: 700;
+    }
+
+.Button {
+    color: #e5e5e5;
+    min-width: 200px;
+    font-size: 30px;
+    background-color: #33ce78;
+    border: solid #398d57 2px;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+}
+
+    .Button:hover {
+        background-color: #36d77e;
+        transition: all 0.5s ease;
+    }
+
+    .Button:active {
+        background-color: #2ca161;
+        transition: all 0.1s ease;
+    }
+
+.Input {
+    border: solid #398d57 2px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.Border {
+    border: solid #398d57 2px;
+    border-radius: 20px;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    font-size: 20px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-size: 20px;
+    min-height: 100%;
+}
+
+main {
+    min-height: 100%
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px; /* Vertically center the text there */
+}

@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Ваши заметки";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Ваши заметки</h1>
+    @{
+        var link = Context.Request.Cookies.DeserializeObjectFromJson<Link>("link");
+    }
+    <h3>Ваша ссылка: @link.Id <a asp-area="" asp-controller="Enter" asp-action="ExitFromLink">Выйти</a></h3>
+    <p>Редактируйте свои заметки или <a asp-area="" asp-controller="Notes" asp-action="EditNode">создайте новую</a>.</p>
+    <br />
+    <br />
+    @await Html.PartialAsync("Notes")
+</div>

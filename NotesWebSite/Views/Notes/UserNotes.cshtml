@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Ваши заметки";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Ваши заметки</h1>
+    <h3>Ваше имя: @User.Identity.Name . <a asp-area="" asp-controller="Enter" asp-action="ExitFromUser">Выйти</a></h3>
+    <p>@User.Identity.Name Редактируйте свои заметки или <a asp-area="" asp-controller="Notes" asp-action="EditNote">создайте новую</a>.</p>
+    <br />
+    <br />
+    @await Html.PartialAsync("Notes")
+</div>

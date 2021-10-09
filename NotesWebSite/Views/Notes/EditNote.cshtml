@@ -1,4 +1,6 @@
-﻿@section styles
+﻿@model NoteBase
+
+@section styles
 {
     <link rel="stylesheet" href="~/css/text.css" asp-append-version="true">
 }
@@ -8,18 +10,22 @@
     <script src="~/js/text.js" asp-append-version="true"></script>
 }
 
+@{
+    ViewData["Title"] = "Редактирование";
+}
+
 <div style="min-height: 100vh; padding: 1.5em;">
-    <form asp-controller="Notes" asp-action="SaveNote">
-        <div class="NoteTitle"><input type="text" placeholder="Введите заголовок" name="title"></div>
+    <form method="post">
+        <div class="NoteTitle"><input type="text" placeholder="Введите заголовок" name="title" value="@Model?.Title"></div>
         <br />
-        <div class="NoteBlock" id="NoteBlock"></div>
+        <div class="NoteBlock" id="NoteBlock">@Html.Raw(Model?.Content)</div>
         <br />
         <div class="TextAreaNone">
-            <textarea class="TextArea" id="TextArea" name="content"> </textarea>
+            <textarea class="TextArea" id="TextArea" name="content">@Model?.Content</textarea>
         </div>
         <br />
         <div style="display:flex;justify-content:center;align-items:center;">
-            <input type="submit" class="Button" value="Сохранить" />
+            <input type="submit" class="Button" asp-controller="Notes" asp-action="SaveNote" asp-route-id="@Model?.Id" value="Сохранить" />
         </div>
     </form>
 </div>

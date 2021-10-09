@@ -1,0 +1,38 @@
+﻿.NoteSection {
+    background-color: #fff;
+    border: solid #398d57 2px;
+    border-radius: 20px;
+    transition: all 0.5s ease;
+}
+
+    .NoteSection :hover {
+        background-color: #aaaaaa;
+        transition: all 0.5s ease;
+    }
+
+    .NoteSection :active {
+        background-color: #555555;
+        transition: all 0.5s ease;
+    }
+
+.LinkEdit {
+    border: none;
+    background: none;
+    color: #398d57;
+}
+
+    .LinkEdit:hover {
+        color: #2cbb5f;
+        text-decoration: underline;
+    }
+
+.LinkDelete {
+    border: none;
+    background: none;
+    color: #ce4133;
+}
+
+    .LinkDelete:hover {
+        color: #e82d1b;
+        text-decoration: underline;
+    }

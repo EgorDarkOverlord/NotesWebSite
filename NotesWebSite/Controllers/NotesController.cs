@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NotesWebSite.Models;
+using NotesWebSite.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,21 +36,29 @@ namespace NotesWebSite.Controllers
             HttpContext.Response.Cookies.RewriteObjectAsJson<string>("enterState", "User");
             if (CorrectEnter())
             {
-                var id = db.Users.AsQueryable().FirstOrDefault(u => u.Login == User.Identity.Name).Id;
-                notes = db.UserNotes.AsQueryable().Where(n => n.UserId == id).ToList<NoteBase>();
-                return View();
+                var id = db.Users.FirstOrDefault(u => u.Login == User.Identity.Name).Id;
+                notes = db.UserNotes.Where(n => n.UserId == id).ToList<NoteBase>();
+                NotesViewModel notesViewModel = new NotesViewModel
+                {
+                    Notes = notes
+                };
+                return View(notesViewModel);
             }
             return RedirectToAction("Login", "Enter");
         }
 
         public IActionResult LinkNotes()
         {
-            HttpContext.Response.Cookies.RewriteObjectAsJson<string>("enterState", "Notes");
+            HttpContext.Response.Cookies.RewriteObjectAsJson<string>("enterState", "Link");
             var link = HttpContext.Request.Cookies.DeserializeObjectFromJson<Link>("link");
             if (CorrectEnter())
             {
-                notes = db.LinkNotes.AsQueryable().Where(n => n.LinkId == link.Id).ToList<NoteBase>();
-                return View();
+                notes = db.LinkNotes.Where(n => n.LinkId == link.Id).ToList<NoteBase>();
+                NotesViewModel notesViewModel = new NotesViewModel
+                {
+                    Notes = notes
+                };
+                return View(notesViewModel);
             }
             return RedirectToAction("Login", "Enter");
         }
@@ -73,6 +82,13 @@ namespace NotesWebSite.Controllers
             return View();
         }
 
+        public IActionResult SelectNote(Guid? id = null)
+        {
+            if (!CorrectEnter())
+                return RedirectToAction("Login", "Enter");
+            return View(db.Notes.Find(id));
+        }
+
         public IActionResult EditNote()
         {
             if (!CorrectEnter())
@@ -81,14 +97,38 @@ namespace NotesWebSite.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaveNote(string title, string content)
+        public IActionResult EditNote(Guid? id = null)
         {
             if (!CorrectEnter())
                 return RedirectToAction("Login", "Enter");
-            Guid noteId = HttpContext.Request.Cookies.DeserializeObjectFromJson<Guid>("noteId");
+            return View(db.Notes.Find(id));
+        }
+
+        [HttpPost]
+        public IActionResult DeleteNote(Guid? id = null)
+        {
+            if (!CorrectEnter())
+                return RedirectToAction("Login", "Enter");
+            db.Notes.Remove(db.Notes.Find(id));
+            db.SaveChanges();
+            switch (HttpContext.Request.Cookies.DeserializeObjectFromJson<string>("enterState"))
+            {
+                case "User":
+                    return RedirectToAction("UserNotes");
+                case "Link":
+                    return RedirectToAction("LinkNotes");
+            }
+            return RedirectToAction("Login", "Enter");
+        }
+
+        [HttpPost]
+        public IActionResult SaveNote(Guid? id, string title, string content)
+        {
+            if (!CorrectEnter())
+                return RedirectToAction("Login", "Enter");
             string enterState = HttpContext.Request.Cookies.DeserializeObjectFromJson<string>("enterState");
 
-            NoteBase note = db.Notes.Find(noteId);
+            NoteBase note = db.Notes.Find(id);
             if (note != null)
             {
                 note.Title = title;
@@ -110,7 +150,7 @@ namespace NotesWebSite.Controllers
                         ((UserNote)note).UserId = db.Users.FirstOrDefault(u => u.Login == User.Identity.Name).Id;
                         break;
                     case "Link":
-                        note = new UserNote
+                        note = new LinkNote
                         {
                             Title = title,
                             Content = content,

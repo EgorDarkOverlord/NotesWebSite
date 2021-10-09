@@ -1,4 +1,11 @@
-﻿@{
+﻿@model NotesWebSite.ViewModels.NotesViewModel
+
+@section styles
+{
+    <link rel="stylesheet" href="~/css/notes.css" asp-append-version="true">
+}
+
+@{
     ViewData["Title"] = "Ваши заметки";
 }
 
@@ -8,7 +15,7 @@
         var link = Context.Request.Cookies.DeserializeObjectFromJson<Link>("link");
     }
     <h3>Ваша ссылка: @link.Id <a asp-area="" asp-controller="Enter" asp-action="ExitFromLink">Выйти</a></h3>
-    <p>Редактируйте свои заметки или <a asp-area="" asp-controller="Notes" asp-action="EditNode">создайте новую</a>.</p>
+    <p>Редактируйте свои заметки или <a asp-area="" asp-controller="Notes" asp-action="EditNote">создайте новую</a>.</p>
     <br />
     <br />
     @await Html.PartialAsync("Notes")

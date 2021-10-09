@@ -1,0 +1,17 @@
+﻿@model NoteBase
+@{
+    ViewData["Title"] = "Просмотр";
+}
+
+@section styles
+{
+    <link rel="stylesheet" href="~/css/text.css" asp-append-version="true">
+}
+
+<div style="min-height: 100vh; padding: 1.5em;">
+
+    <div class="NoteTitle"><h1>@Model?.Title</h1></div>
+    <br />
+    <div class="NoteBlock" id="NoteBlock">@Html.Raw(Model?.Content)</div>
+    <br />
+</div>

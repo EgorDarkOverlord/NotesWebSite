@@ -1,9 +1,35 @@
+﻿@functions
+{
+    string CheckNullName(string s)
+    {
+        return s != null ? s : "Без названия";
+    }
+}
+
 <div class="d-flex flex-column justify-content-around align-items-stretch">
-    <div class="p-2 Border">
-
-    </div>
-    <div class="p-2 Border">
-
-    </div>
+    @if (Model?.Notes != null)
+    {
+        foreach (var note in Model.Notes)
+        {
+            <div class="p-2">
+                <div class="p-2 Border">
+                    <div class="text-left">
+                        <div>
+                            <h3>@CheckNullName(note.Title)</h3>
+                            <p>Дата создания: @note.CreateDate</p>
+                            <p>Дата редактирования: @note.EditDate</p>
+                        </div>
+                        <div class="text-right align-self-baseline">
+                            <form asp-controller="Notes">
+                                <input type="submit" class="LinkEdit" asp-action="SelectNote" asp-route-id="@note.Id" value="Просмотреть" />
+                                <input type="submit" class="LinkEdit" asp-action="EditNote" asp-route-id="@note.Id" value="Редактировать" />
+                                <input type="submit" class="LinkDelete" asp-action="DeleteNote" asp-route-id="@note.Id" value="Удалить" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
 </div>
 

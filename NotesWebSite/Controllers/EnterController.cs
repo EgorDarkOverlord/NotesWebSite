@@ -77,8 +77,7 @@ namespace NotesWebSite.Controllers
             Link _link = await db.Links.FirstOrDefaultAsync(l => l.Id == link);
             if (_link != null)
             {
-                HttpContext.Response.Cookies.Delete("link");
-                HttpContext.Response.Cookies.SerializeObjectAsJson<Link>("link", _link);
+                HttpContext.Response.Cookies.RewriteObjectAsJson<Link>("link", _link);
                 return RedirectToAction("LinkNotes", "Notes");
             }
             
@@ -90,8 +89,7 @@ namespace NotesWebSite.Controllers
             var link = new Link();
             db.Links.Add(link);
             db.SaveChanges();
-            HttpContext.Response.Cookies.Delete("link");
-            HttpContext.Response.Cookies.SerializeObjectAsJson<Link>("link", link);
+            HttpContext.Response.Cookies.RewriteObjectAsJson<Link>("link", link);
 
             return RedirectToAction("LinkNotes", "Notes");
         }
@@ -113,12 +111,14 @@ namespace NotesWebSite.Controllers
         public async Task<IActionResult> ExitFromUser()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            HttpContext.Response.Cookies.Delete("enterState");
             return RedirectToAction("Index", "Home");
         }
 
         public IActionResult ExitFromLink()
         {
             HttpContext.Response.Cookies.Delete("link");
+            HttpContext.Response.Cookies.Delete("enterState");
             return RedirectToAction("Index", "Home");
         }
     }

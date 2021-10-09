@@ -9,7 +9,7 @@
 }
 
 <div style="min-height: 100vh; padding: 1.5em;">
-    <form action="post">
+    <form asp-controller="Notes" asp-action="SaveNote">
         <div class="NoteTitle"><input type="text" placeholder="Введите заголовок" name="title"></div>
         <br />
         <div class="NoteBlock" id="NoteBlock"></div>
@@ -19,7 +19,7 @@
         </div>
         <br />
         <div style="display:flex;justify-content:center;align-items:center;">
-            <input type="submit" class="Button" value="Сохранить" asp-controller="Notes" asp-action="SaveNote" />
+            <input type="submit" class="Button" value="Сохранить" />
         </div>
     </form>
 </div>

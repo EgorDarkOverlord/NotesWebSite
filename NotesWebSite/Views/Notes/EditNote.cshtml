@@ -18,10 +18,10 @@
     <form method="post">
         <div class="NoteTitle"><input type="text" placeholder="Введите заголовок" name="title" value="@Model?.Title"></div>
         <br />
-        <div class="NoteBlock" id="NoteBlock">@Html.Raw(Model?.Content)</div>
+        <div class="NoteBlock" id="NoteBlock"></div>
         <br />
         <div class="TextAreaNone">
-            <textarea class="TextArea" id="TextArea" name="content">@Model?.Content</textarea>
+            <textarea class="TextArea" spellcheck="false" id="TextArea" name="content">@Model?.Content</textarea>
         </div>
         <br />
         <div style="display:flex;justify-content:center;align-items:center;">

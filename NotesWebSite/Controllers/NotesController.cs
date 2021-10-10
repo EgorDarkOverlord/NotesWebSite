@@ -42,6 +42,7 @@ namespace NotesWebSite.Controllers
                 {
                     Notes = notes
                 };
+                notesViewModel.CheckDefaultValues();
                 return View(notesViewModel);
             }
             return RedirectToAction("Login", "Enter");
@@ -58,28 +59,10 @@ namespace NotesWebSite.Controllers
                 {
                     Notes = notes
                 };
+                notesViewModel.CheckDefaultValues();
                 return View(notesViewModel);
             }
             return RedirectToAction("Login", "Enter");
-        }
-
-        public IActionResult Notes()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                var id = db.Users.AsQueryable().FirstOrDefault(u => u.Login == User.Identity.Name).Id;
-                notes = db.UserNotes.AsQueryable().Where(n => n.UserId == id).ToList<NoteBase>();
-            }
-            var link = HttpContext.Request.Cookies.DeserializeObjectFromJson<Link>("link");
-            if (link != null)
-            {
-                notes = db.LinkNotes.AsQueryable().Where(n => n.LinkId == link.Id).ToList<NoteBase>();
-            }
-            if (!User.Identity.IsAuthenticated && link == null)
-            {
-                return RedirectToAction("Login", "Enter");
-            }
-            return View();
         }
 
         public IActionResult SelectNote(Guid? id = null)
